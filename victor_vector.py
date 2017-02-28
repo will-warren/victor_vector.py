@@ -61,4 +61,4 @@ def vector_mean(*args):
 
 # calculates magnitude
 def magnitude(vect):
-    return math.sqrt([sum(vect[i]**2) for i in vect])
+    return math.sqrt(sum([vect[i]**2 for i in range(len(vect))]))
