@@ -7,6 +7,14 @@ class ShapeError(BaseException):
     pass
 
 
+# helper function to compare equality of args
+def shape_eq(*args):
+    bool_list = [len(arg) == len(args[0]) for arg in args]
+    if min(bool_list) != True:
+        raise ShapeError
+    else:
+        return True
+
 # only write code to pass the TESTS
 # def __init__(vector):
 #     self.x = vector[0]
@@ -19,33 +27,29 @@ def shape(v):
 
 # adds vectors
 def vector_add(v1, v2):
-    if len(v1) != len(v2):
-        raise ShapeError
-    return [v1[key] + v2[key] for key, value in enumerate(v1)]
+    if shape_eq(v1, v2):
+        return [v1[key] + v2[key] for key, value in enumerate(v1)]
 
 
 # subtracts vectors
 def vector_sub(v1, v2):
-    if len(v1) != len(v2):
-        raise ShapeError
-    return [v1[key] - v2[key] for key, value in enumerate(v1)]
+    if shape_eq(v1, v2):
+        return [v1[key] - v2[key] for key, value in enumerate(v1)]
 
 
 # sums any number of vectors
+# i hate this solution because it can't handle whatever the user sends
+# it seems piecemeal because it just passes the test but doesn't function
 def vector_sum(*args):
-    # raise [ShapeError for i in args if len(args) != len(i)]
-    # use a recursion
-
-    return [sum(i) for i in zip(*args)]
+    if shape_eq(*args):
+        return [sum(i) for i in zip(*args)]
 
 
 # dot multiplies vectors
 def dot(v1, v2):
-    if len(v1) != len(v2):
-        raise ShapeError
-    dot_prod = sum([x * y for x, y in zip(v1, v2)])
-    print(dot_prod)
-    return dot_prod
+    if shape_eq(v1, v2):
+        dot_prod = sum([x * y for x, y in zip(v1, v2)])
+        return dot_prod
 
 
 # multiply vectors
@@ -56,7 +60,8 @@ def vector_multiply(v1, n):
 
 # finds mean value for vectors
 def vector_mean(*args):
-    return [sum(i) / len(i) for i in zip(*args)]
+    if shape_eq(*args):
+        return [sum(i) / len(i) for i in zip(*args)]
 
 
 # calculates magnitude
