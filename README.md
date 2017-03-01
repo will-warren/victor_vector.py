@@ -10,5 +10,8 @@ Files:
 3. victor_vector_test.py, run via terminal/shell
     - run "nosetests victor_vector_test.py"
     - all tests pass!
-
-    Now onto Normal Epic mode...
+4. victor_vector_normal_epic.py
+    - an attempt at a class version of VV
+5. victor_vector_test_normal_epic_mode.py
+    - an attempt at having these tests pass on epic mode.
+    - so far there are 0 passing tests.
